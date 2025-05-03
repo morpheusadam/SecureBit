@@ -16,3 +16,16 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::prefix('auth')->group(function () {
+    Route::get('login', 'App\Http\Controllers\Auth\LoginController@index')->name('login.show');
+    Route::post('login', 'App\Http\Controllers\Auth\LoginController@store')->name('login.store');
+    Route::post('logout', 'App\Http\Controllers\Auth\LoginController@logout')->name('logout');
+
+
+    Route::get('register', 'App\Http\Controllers\Auth\RegisterController@index')->name('register.show');
+    Route::post('register', 'App\Http\Controllers\Auth\RegisterController@store')->name('register.store');
+
+    Route::get('/', function(){ return 'welcome';})->name('dashboard');
+
+ });
