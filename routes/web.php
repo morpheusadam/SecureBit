@@ -17,6 +17,30 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
+Route::prefix('dashboard')->group(function () {
+    Route::get('/index', function () {
+        return 'hi';
+    })->name('dashboard.index');
+
+    
+    Route::prefix('users')->group(function () {
+        Route::get('/', 'App\Http\Controllers\User\UserController@index')->name('users.index');
+        Route::get('/create', 'App\Http\Controllers\User\UserController@create')->name('users.create');
+        Route::get('/profile', 'App\Http\Controllers\User\UserController@profile')->name('users.profile');
+        Route::get('/roles', 'App\Http\Controllers\User\UserController@roles')->name('users.roles');
+        Route::get('/permissions', 'App\Http\Controllers\User\UserController@permissions')->name('users.permissions');
+    });
+});
+
+
+
+ 
+
+ 
+
+
+
 Route::prefix('auth')->group(function () {
     Route::get('login', 'App\Http\Controllers\Auth\LoginController@index')->name('login.show');
     Route::post('login', 'App\Http\Controllers\Auth\LoginController@store')->name('login.store');
@@ -26,6 +50,9 @@ Route::prefix('auth')->group(function () {
     Route::get('register', 'App\Http\Controllers\Auth\RegisterController@index')->name('register.show');
     Route::post('register', 'App\Http\Controllers\Auth\RegisterController@store')->name('register.store');
 
-    Route::get('/', function(){ return 'welcome';})->name('dashboard');
+    Route::get('/', function () {
+        return 'welcome';
+    })->name('dash');
+    //  Route::get('dashboard','App\Http\Controllers\Dasbhoard\DashboardController@index')->name('dashboard');
 
- });
+});

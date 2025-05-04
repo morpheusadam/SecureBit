@@ -1,0 +1,190 @@
+app/
+└── Http/
+    └── Controllers/
+        ├── Admin/               # مدیریت پیشرفته
+        │   ├── DashboardController.php
+        │   ├── SystemController.php
+        │   └── AuditLogController.php
+        │
+        ├── Auth/                # احراز هویت
+        │   ├── LoginController.php
+        │   ├── RegisterController.php
+        │   ├── ForgotPasswordController.php
+        │   └── SocialAuthController.php
+        │
+        ├── User/                # مدیریت کاربران
+        │   ├── ProfileController.php
+        │   ├── AccountController.php
+        │   ├── SettingsController.php
+        │   └── Admin/
+        │       ├── UserManagementController.php
+        │       └── RolePermissionController.php
+        │
+        ├── Product/             # ماژول محصولات
+        │   ├── ProductController.php
+        │   ├── CategoryController.php
+        │   ├── InventoryController.php
+        │   ├── ReviewController.php
+        │   └── ImportExportController.php
+        │
+        ├── Order/               # ماژول سفارشات
+        │   ├── OrderController.php
+        │   ├── PaymentController.php
+        │   ├── InvoiceController.php
+        │   └── ShippingController.php
+        │
+        ├── Content/             # مدیریت محتوا
+        │   ├── PageController.php
+        │   ├── PostController.php
+        │   ├── MenuController.php
+        │   └── MediaController.php
+        │
+        ├── Report/               # گزارش‌ها
+        │   ├── SalesReportController.php
+        │   ├── UserReportController.php
+        │   └── SystemReportController.php
+        │
+        ├── Notification/        # اطلاع‌رسانی
+        │   ├── EmailController.php
+        │   ├── SMSController.php
+        │   └── PushNotificationController.php
+        │
+        ├── Api/                 # API ها
+        │   ├── V1/
+        │   │   ├── AuthController.php
+        │   │   ├── UserController.php
+        │   │   └── ProductController.php
+        │   └── V2/
+        │       ├── OrderController.php
+        │       └── PaymentController.php
+        │
+        └── Frontend/            # بخش کاربری
+            ├── HomeController.php
+            ├── CartController.php
+            ├── CheckoutController.php
+            └── ContactController.php
+
+
+
+
+
+app/
+├── Models/
+│   ├── User/
+│   │   ├── User.php
+│   │   ├── Profile.php
+│   │   ├── Role.php
+│   │   └── Permission.php
+│   ├── Product/
+│   │   ├── Product.php
+│   │   ├── Category.php
+│   │   ├── Inventory.php
+│   │   └── Review.php
+│   ├── Order/
+│   │   ├── Order.php
+│   │   ├── OrderItem.php
+│   │   ├── Payment.php
+│   │   ├── Invoice.php
+│   │   └── Shipping.php
+│   ├── Content/
+│   │   ├── Page.php
+│   │   ├── Post.php
+│   │   ├── Menu.php
+│   │   └── Media.php
+│   ├── Notification/
+│   │   ├── EmailNotification.php
+│   │   ├── SMSNotification.php
+│   │   └── PushNotification.php
+│   └── System/
+│       ├── AuditLog.php
+│       ├── Report.php
+│       └── SystemSetting.php
+
+
+
+
+
+
+
+resources/
+└── views/
+    ├── admin/
+    │   ├── dashboard/
+    │   │   └── index.blade.php
+    │   ├── system/
+    │   │   └── settings.blade.php
+    │   └── audit-logs/
+    │       └── index.blade.php
+    ├── auth/
+    │   ├── login.blade.php
+    │   ├── register.blade.php
+    │   └── passwords/
+    │       ├── email.blade.php
+    │       └── reset.blade.php
+    ├── user/
+    │   ├── profile/
+    │   │   ├── show.blade.php
+    │   │   └── edit.blade.php
+    │   ├── account/
+    │   │   └── settings.blade.php
+    │   └── admin/
+    │       ├── users/
+    │       │   ├── index.blade.php
+    │       │   └── create.blade.php
+    │       └── roles/
+    │           └── index.blade.php
+    ├── product/
+    │   ├── products/
+    │   │   ├── index.blade.php
+    │   │   ├── show.blade.php
+    │   │   └── create.blade.php
+    │   ├── categories/
+    │   │   └── index.blade.php
+    │   └── inventory/
+    │       └── index.blade.php
+    ├── order/
+    │   ├── orders/
+    │   │   └── index.blade.php
+    │   ├── payments/
+    │   │   └── index.blade.php
+    │   └── invoices/
+    │       └── show.blade.php
+    ├── content/
+    │   ├── pages/
+    │   │   └── show.blade.php
+
+
+
+
+
+
+app/
+└── Http/
+    ├── Requests/
+    │   ├── Auth/
+    │   │   ├── LoginRequest.php
+    │   │   ├── RegisterRequest.php
+    │   │   └── PasswordResetRequest.php
+    │   ├── User/
+    │   │   ├── ProfileUpdateRequest.php
+    │   │   ├── AccountUpdateRequest.php
+    │   │   └── Admin/
+    │   │       ├── UserCreateRequest.php
+    │   │       └── RoleUpdateRequest.php
+    │   ├── Product/
+    │   │   ├── ProductRequest.php
+    │   │   ├── CategoryRequest.php
+    │   │   └── InventoryRequest.php
+    │   ├── Order/
+    │   │   ├── OrderRequest.php
+    │   │   └── PaymentRequest.php
+    │   ├── Content/
+    │   │   ├── PageRequest.php
+    │   │   └── PostRequest.php
+    │   └── Notification/
+    │       ├── EmailRequest.php
+    │       └── SMSRequest.php
+
+
+
+    
