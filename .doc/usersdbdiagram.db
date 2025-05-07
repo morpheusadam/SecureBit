@@ -1,0 +1,79 @@
+erDiagram
+    users {
+        bigint id PK "کلید اصلی"
+        string email "ایمیل (منحصر به فرد)"
+        string username "نام کاربری (منحصر به فرد)"
+        string password_hash "هش رمز عبور"
+        timestamp email_verified_at "تایید ایمیل"
+        boolean is_active "وضعیت فعال"
+        timestamp created_at
+        timestamp updated_at
+        timestamp deleted_at "حذف نرم"
+    }
+    
+    user_profiles {
+        bigint id PK
+        bigint user_id FK "رابطه یک به یک با users"
+        string full_name "نام کامل"
+        text bio "توضیحات پروفایل"
+        string avatar_url "آدرس آواتار"
+        json settings "تنظیمات کاربر (JSON)"
+    }
+    
+    user_social_accounts {
+        bigint id PK
+        bigint user_id FK "رابطه یک به چند با users"
+        string provider "ارائه‌دهنده (google/github/...)"
+        string provider_id "شناسه در سیستم ارائه‌دهنده"
+        text token_data "داده‌های توکن (رمزنگاری شده)"
+        timestamp expires_at "انقضای توکن"
+    }
+    
+    roles {
+        bigint id PK
+        string name "شناسه نقش (منحصر به فرد)"
+        string title "عنوان نمایشی"
+        integer level "سطح دسترسی (برای سلسله مراتب)"
+        bigint parent_id FK "رابطه سلسله مراتبی با خودش"
+        boolean is_active "فعال/غیرفعال"
+        string guard_name "نوع احراز (مثلا web, api)"
+    }
+    
+    permissions {
+        bigint id PK
+        string group "گروه دسترسی (مثلا posts, users)"
+        string name "نام دسترسی (مثلا create_post)"
+        string title "عنوان نمایشی"
+        string machine_description "توضیحات ماشین‌خوان"
+        string guard_name "نوع احراز"
+    }
+    
+    role_permission {
+        bigint role_id FK "رابطه با roles"
+        bigint permission_id FK "رابطه با permissions"
+        timestamp assigned_at "تاریخ اختصاص"
+    }
+    
+    user_role {
+        bigint user_id FK "رابطه با users"
+        bigint role_id FK "رابطه با roles"
+        timestamp assigned_at "تاریخ اختصاص"
+        bigint assigned_by "کاربر اختصاص دهنده (FK به users)"
+    }
+    
+    user_tokens {
+        bigint id PK
+        bigint user_id FK "رابطه با users"
+        string token "توکن دسترسی (رمزنگاری شده)"
+        string device_info "اطلاعات دستگاه"
+        string ip_address "آدرس IP"
+        timestamp expires_at "انقضای توکن"
+        timestamp last_used_at "آخرین استفاده"
+    }
+
+    users ||--o{ user_profiles : "1:1 | ON DELETE CASCADE"
+    users ||--|{ user_social_accounts : "1:N | ON DELETE CASCADE"
+    users ||--|{ user_tokens : "1:N | ON DELETE CASCADE"
+    users }o--|{ user_role : "N:M | ON DELETE CASCADE"
+    roles }o--|{ role_permission : "N:M | ON DELETE CASCADE"
+    roles }|--|| roles : "سلسله مراتب | ON DELETE SET NULL"
