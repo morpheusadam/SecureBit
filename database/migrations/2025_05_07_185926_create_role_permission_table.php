@@ -23,6 +23,8 @@ class CreateRolePermissionTable extends Migration
             $table->timestamp('assigned_at')->useCurrent();
             
             $table->primary(['role_id', 'permission_id']);
+            $table->timestamps();
+
         });
     }
 
