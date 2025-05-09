@@ -20,20 +20,20 @@ class UserController extends Controller
     public function index()
     {
         $users = \App\Models\User::with(['roles', 'profile'])->get();
-        return view('dashboard.userindex', compact('users'));
+        return view('dashboard.users.index', compact('users'));
     }
 
     public function create()
     {
         $roles = \App\Models\Role::all(); // یا هر روش دیگری که نقش‌ها را دریافت می‌کنید
-        return view('dashboard.user-create', compact('roles'));
+        return view('dashboard.users.create', compact('roles'));
     }
  
 
     public function edit(User $user)
     {
         $roles = Role::all();
-        return view('dashboard.user-edit', compact('user', 'roles'));
+        return view('<dashboard class="users"></dashboard>edit', compact('user', 'roles'));
     }
 
     public function update(Request $request, User $user)

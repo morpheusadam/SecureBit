@@ -10,7 +10,10 @@ use App\Http\Controllers\Auth\RegisterController;
 
  
 
-
+Route::get('/', function () {
+            return view('home');
+        })->name('home');
+        
 Route::middleware('guest')->group(function () {
     // نمایش فرم لاگین
     Route::get('/login', [LoginController::class, 'index'])->name('login.show');
@@ -34,9 +37,7 @@ Route::middleware('auth')->group(function () {
    
     
     Route::middleware('check.role:user')->group(function () {
-        Route::get('/', function () {
-            return view('home');
-        })->name('home');
+        
     });
 });
 

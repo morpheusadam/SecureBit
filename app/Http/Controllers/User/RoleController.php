@@ -20,7 +20,7 @@ class RoleController extends Controller
                     
         $permissions = Permission::orderBy('title')->get();
         
-        return view('dashboard.index-role', compact('roles', 'permissions'));
+        return view('dashboard.roles.index', compact('roles', 'permissions'));
     }
 
     public function create()
@@ -32,7 +32,7 @@ class RoleController extends Controller
         $permissions = Permission::orderBy('group')->orderBy('title')->get();
         $permissionGroups = $permissions->groupBy('group');
         
-        return view('dashboard.create-role', compact('parentRoles', 'permissionGroups'));
+        return view('dashboard.roles.create', compact('parentRoles', 'permissionGroups'));
     }
     public function store(Request $request)
     {
@@ -74,7 +74,7 @@ class RoleController extends Controller
                     
         $permissions = Permission::orderBy('title')->get();
         
-        return view('dashboard.edit-role', compact('role', 'roles', 'permissions'));
+        return view('dashboard.roles.edit', compact('role', 'roles', 'permissions'));
     }
 
     public function update(Request $request, Role $role)
