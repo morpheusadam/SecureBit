@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\Role;
-use App\Models\UserProfile;
+use App\Models\User\User;
+use App\Models\User\Role;
+use App\Models\User\UserProfile;
 use App\Http\Requests\Auth\RegisterUserRequest;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;

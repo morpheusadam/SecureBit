@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\User;
-use App\Models\UserProfile;
-use App\Models\Role;
+use App\Models\User\User;
+use App\Models\User\UserProfile;
+use App\Models\User\Role;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
@@ -19,13 +19,13 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = \App\Models\User::with(['roles', 'profile'])->get();
+        $users = \App\Models\User\User::with(['roles', 'profile'])->get();
         return view('dashboard.users.index', compact('users'));
     }
 
     public function create()
     {
-        $roles = \App\Models\Role::all(); // یا هر روش دیگری که نقش‌ها را دریافت می‌کنید
+        $roles = \App\Models\User\Role::all(); // یا هر روش دیگری که نقش‌ها را دریافت می‌کنید
         return view('dashboard.users.create', compact('roles'));
     }
  

@@ -2,8 +2,8 @@
 namespace App\Http\Controllers\User;
 
 use App\Http\Controllers\Controller;
-use App\Models\Role;
-use App\Models\Permission;
+use App\Models\User\Role;
+use App\Models\User\Permission;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Validation\Rule;
@@ -34,6 +34,7 @@ class RoleController extends Controller
         
         return view('dashboard.roles.create', compact('parentRoles', 'permissionGroups'));
     }
+    
     public function store(Request $request)
     {
         $validated = $request->validate([

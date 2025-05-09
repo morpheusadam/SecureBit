@@ -5,7 +5,7 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use App\Models\Role;
+use App\Models\User\Role;
 
 class CheckRole
 {
@@ -46,7 +46,7 @@ class CheckRole
     /**
      * بررسی نقش کاربر در دیتابیس
      *
-     * @param  \App\Models\User  $user
+     * @param  \App\Models\User\User  $user
      * @param  string  $role
      * @return bool
      */

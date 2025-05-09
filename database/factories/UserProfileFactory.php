@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 
 class UserProfileFactory extends Factory
 {
-    protected $model = \App\Models\UserProfile::class;
+    protected $model = \App\Models\User\UserProfile::class;
 
     public function definition()
     {

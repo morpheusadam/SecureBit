@@ -1,0 +1,100 @@
+    categories {
+        bigint id PK
+        string name
+        string slug "اسلاگ برای URL"
+        text description
+        bigint parent_id FK "دسته‌بندی والد"
+        boolean is_active
+        integer order "ترتیب نمایش"
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    posts {
+        bigint id PK
+        string title
+        string slug
+        text excerpt "خلاصه مطلب"
+        text content
+        string featured_image "تصویر شاخص"
+        bigint author_id FK "نویسنده (رابطه با users)"
+        bigint category_id FK "دسته‌بندی (رابطه با categories)"
+        string status "enum(published,draft,archived,pending)"
+        timestamp published_at
+        boolean is_featured
+        integer view_count
+        string meta_title
+        text meta_description
+        json meta_keywords
+        timestamp created_at
+        timestamp updated_at
+        timestamp deleted_at
+    }
+
+    tags {
+        bigint id PK
+        string name
+        string slug
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    post_tag {
+        bigint post_id FK
+        bigint tag_id FK
+        timestamp created_at
+    }
+
+    comments {
+        bigint id PK
+        text content
+        bigint user_id FK "کاربر ثبت‌کننده (رابطه با users)"
+        bigint post_id FK "مطلب مربوطه (رابطه با posts)"
+        bigint parent_id FK "نظر والد برای پاسخ‌ها"
+        string status "enum(approved,pending,spam,trash)"
+        string author_name "برای کاربران مهمان"
+        string author_email
+        string author_ip
+        string author_user_agent
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    post_views {
+        bigint id PK
+        bigint post_id FK
+        string ip_address
+        string user_agent
+        bigint user_id FK "اگر کاربر لاگین کرده باشد"
+        timestamp created_at
+    }
+
+    post_meta {
+        bigint id PK
+        bigint post_id FK
+        string meta_key
+        text meta_value
+        timestamp created_at
+        timestamp updated_at
+    }
+
+    bookmarks {
+        bigint id PK
+        bigint user_id FK
+        bigint post_id FK
+        timestamp created_at
+    }
+
+    categories }|--|| categories : "سلسله مراتب"
+    posts }o--|| categories : "هر مطلب یک دسته‌بندی دارد"
+    posts }o--|| users : "نویسنده مطلب"
+    posts }o--|{ post_tag : "مطالب می‌توانند چندین تگ داشته باشند"
+    tags }o--|{ post_tag : "تگ‌ها می‌توانند به چندین مطلب مرتبط باشند"
+    comments }o--|| posts : "هر نظر مربوط به یک مطلب است"
+    comments }o--|| users : "کاربر ثبت‌کننده نظر"
+    comments }|--|| comments : "پاسخ به نظرات"
+    post_views }o--|| posts : "آمار بازدید هر مطلب"
+    post_views }o--|| users : "بازدیدکننده (اگر لاگین کرده باشد)"
+    post_meta }o--|| posts : "متادیتای اضافی برای مطالب"
+    bookmarks }o--|| users : "کاربری که مطلب را ذخیره کرده"
+    bookmarks }o--|| posts : "مطلب ذخیره شده"

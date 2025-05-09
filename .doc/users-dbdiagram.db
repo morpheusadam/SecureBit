@@ -28,6 +28,9 @@ erDiagram
         text token_data "داده‌های توکن (رمزنگاری شده)"
         timestamp expires_at "انقضای توکن"
     }
+
+    
+        
     
     roles {
         bigint id PK
