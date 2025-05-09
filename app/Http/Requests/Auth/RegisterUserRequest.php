@@ -4,114 +4,77 @@ namespace App\Http\Requests\Auth;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rules\Password;
-use Illuminate\Validation\Rule;
 
 class RegisterUserRequest extends FormRequest
 {
-    /**
-     * Determine if the user is authorized to make this request.
-     */
-    public function authorize(): bool
+    public function authorize()
     {
-        return true; // Registration is open to all guests
+        return true;
     }
 
-    /**
-     * Get the validation rules that apply to the request.
-     */
-    public function rules(): array
+    public function rules()
     {
         return [
-            'name' => [
+            'username' => [
                 'required',
                 'string',
-                'max:255',
-                'regex:/^[\pL\s\-]+$/u'
+                'max:30',
+                'unique:users,username',
+                'regex:/^[a-zA-Z0-9_\-]+$/'
             ],
             'email' => [
                 'required',
-                'string',
                 'email:rfc,dns',
                 'max:255',
                 'unique:users,email'
+            ],
+            'full_name' => [
+                'required',
+                'string',
+                'max:100',
+                'regex:/^[\p{L}\s\-]+$/u'
             ],
             'password' => [
                 'required',
                 'confirmed',
                 Password::min(8)
                     ->mixedCase()
-                    ->letters()
                     ->numbers()
                     ->symbols()
-                    ->uncompromised()
             ],
-            'password_confirmation' => [
-                'required',
-                'same:password'
-            ],
-            'terms' => [
-                'required',
-                'accepted'
-            ]
+            'terms' => ['required', 'accepted']
         ];
     }
 
-    /**
-     * Get custom attribute names for validator errors.
-     */
-    public function attributes(): array
+    public function messages()
     {
         return [
-            'name' => 'full name',
-            'email' => 'email address',
-            'password_confirmation' => 'password confirmation',
-            'terms' => 'terms and conditions'
+            'username.required' => 'نام کاربری الزامی است.',
+            'username.unique' => 'این نام کاربری قبلا ثبت شده است.',
+            'username.regex' => 'نام کاربری فقط می‌تواند شامل حروف، اعداد، خط تیره و زیرخط باشد.',
+            
+            'email.required' => 'ایمیل الزامی است.',
+            'email.email' => 'ایمیل معتبر نیست.',
+            'email.unique' => 'این ایمیل قبلا ثبت شده است.',
+            
+            'full_name.required' => 'نام کامل الزامی است.',
+            'full_name.regex' => 'نام کامل فقط می‌تواند شامل حروف و فاصله باشد.',
+            
+            'password.required' => 'رمز عبور الزامی است.',
+            'password.confirmed' => 'تکرار رمز عبور مطابقت ندارد.',
+            'password.min' => 'رمز عبور باید حداقل 8 کاراکتر باشد.',
+            
+            'terms.required' => 'پذیرش قوانین الزامی است.',
+            'terms.accepted' => 'شما باید قوانین را بپذیرید.'
         ];
     }
 
-    /**
-     * Get custom error messages for validator errors.
-     */
-    public function messages(): array
-    {
-        return [
-            'name.required' => 'Please enter your full name.',
-            'name.regex' => 'Your name may only contain letters, spaces, and hyphens.',
-
-            'email.required' => 'Please enter your email address.',
-            'email.email' => 'Please enter a valid email address.',
-            'email.unique' => 'This email is already registered.',
-
-            'password.required' => 'Please enter a password.',
-            'password.confirmed' => 'The passwords do not match.',
-            'password.min' => 'Password must be at least 8 characters.',
-            'password.mixed' => 'Password must contain both uppercase and lowercase letters.',
-            'password.uncompromised' => 'This password has appeared in a data leak. Please choose a different one.',
-
-            'password_confirmation.required' => 'Please confirm your password.',
-            'password_confirmation.same' => 'The passwords do not match.',
-
-            'terms.required' => 'You must accept the terms and conditions.',
-            'terms.accepted' => 'You must accept the terms and conditions to register.'
-        ];
-    }
-
-    /**
-     * Prepare the data for validation.
-     */
-    protected function prepareForValidation(): void
+    protected function prepareForValidation()
     {
         $this->merge([
+            'username' => strtolower(trim($this->username)),
             'email' => strtolower(trim($this->email)),
-            'name' => preg_replace('/\s+/', ' ', trim($this->name))
+            'full_name' => preg_replace('/\s+/', ' ', trim($this->full_name))
         ]);
-    }
-
-    /**
-     * Get the validated data from the request.
-     */
-    public function validatedData(): array
-    {
-        return $this->validated();
     }
 }

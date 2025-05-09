@@ -3,8 +3,46 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\DashboardController;
 use App\Http\Controllers\User\UserController;
 use App\Http\Controllers\User\RoleController;
+use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\RegisterController;
 
-Route::prefix('dashboard')->name('dashboard.')->group(function () {
+
+
+ 
+
+
+Route::middleware('guest')->group(function () {
+    // نمایش فرم لاگین
+    Route::get('/login', [LoginController::class, 'index'])->name('login.show');
+    
+    // پردازش فرم لاگین
+    Route::post('/login', [LoginController::class, 'store'])->name('login.store');
+    
+    // نمایش فرم ثبت نام
+    Route::get('/register', [RegisterController::class, 'index'])->name('register.show');
+    
+    // پردازش فرم ثبت نام
+    Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
+});
+
+// روت‌های محافظت شده (نیاز به احراز هویت)
+Route::middleware('auth')->group(function () {
+    // خروج کاربر
+    Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+    
+    // روت‌های مختلف بر اساس نقش کاربر
+   
+    
+    Route::middleware('check.role:user')->group(function () {
+        Route::get('/', function () {
+            return view('home');
+        })->name('home');
+    });
+});
+
+
+
+Route::middleware('check.role:Administrator,super-admin')->prefix('dashboard')->name('dashboard.')->group(function () {
     
     // Dashboard Routes
     Route::controller(DashboardController::class)->group(function () {
