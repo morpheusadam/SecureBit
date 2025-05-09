@@ -16,6 +16,17 @@ class DatabaseSeeder extends Seeder
             UserRoleSeeder::class,
             UserSocialAccountSeeder::class,
             UserTokenSeeder::class,
+
+              // Blog module seeders
+            // Blog module seeders (in proper order)
+            BlogCategorySeeder::class,
+            BlogTagSeeder::class,
+            BlogPostSeeder::class,
+            BlogPostTagSeeder::class,
+            BlogCommentSeeder::class,
+            BlogPostViewSeeder::class,
+            BlogPostMetaSeeder::class,
+            BlogBookmarkSeeder::class,
         ]);
     }
 }

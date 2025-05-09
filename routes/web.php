@@ -87,4 +87,32 @@ Route::middleware('check.role:Administrator,super-admin')->prefix('dashboard')->
             Route::get('/{role}/users', 'users')->name('users');
         });
     });
+
+    // Blog Admin Routes
+// Blog Admin Routes
+Route::prefix('blog')->name('blog.')->middleware('check.role:Administrator,super-admin,editor,author')->group(function () {
+    // Posts Management
+    Route::prefix('posts')->name('posts.')->controller(\App\Http\Controllers\Admin\Blog\PostController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{post}/edit', 'edit')->name('edit');
+        Route::put('/{post}', 'update')->name('update');
+        Route::delete('/{post}', 'destroy')->name('destroy');
+        
+        // Additional post routes can be added here
+    });
+    
+    // Categories Management
+    Route::prefix('categories')->name('categories.')->controller(\App\Http\Controllers\Admin\Blog\CategoryController::class)->group(function () {
+        Route::get('/', 'index')->name('index');
+        Route::get('/create', 'create')->name('create');
+        Route::post('/', 'store')->name('store');
+        Route::get('/{category}/edit', 'edit')->name('edit');
+        Route::put('/{category}', 'update')->name('update');
+        Route::delete('/{category}', 'destroy')->name('destroy');
+    });
+
+});
+
 });

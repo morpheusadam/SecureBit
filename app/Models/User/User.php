@@ -82,4 +82,9 @@ class User extends Authenticatable implements MustVerifyEmail
     {
         return $this->permissions()->contains($permission);
     }
+
+      protected static function newFactory()
+    {
+        return \Database\Factories\UserFactory::new();
+    }
 }

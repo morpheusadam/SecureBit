@@ -3,9 +3,9 @@
 namespace Database\Seeders;
 
 use Illuminate\Database\Seeder;
-use App\Models\Category;
-use App\Models\Post;
-use App\Models\Tag;
+use App\Models\Blog\Category;
+use App\Models\Blog\Post;
+use App\Models\Blog\Tag;
 use App\Models\User\User;
 
 class BlogSeeder extends Seeder

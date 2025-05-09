@@ -30,9 +30,9 @@
                 <div class="menu-title">Posts</div>
             </a>
             <ul>
-                <li><a href="#"><i class="bx bx-right-arrow-alt"></i>All Posts</a></li>
-                <li><a href="#"><i class="bx bx-right-arrow-alt"></i>Add New</a></li>
-                <li><a href="#"><i class="bx bx-right-arrow-alt"></i>Categories</a></li>
+                <li><a href="{{ route('dashboard.blog.posts.index') }}"><i class="bx bx-right-arrow-alt"></i>All Posts</a></li>
+<li><a href="{{ route('dashboard.blog.posts.create') }}"><i class="bx bx-right-arrow-alt"></i>Add New</a></li>
+<li><a href="{{ route('dashboard.blog.categories.index') }}"><i class="bx bx-right-arrow-alt"></i>Categories</a></li>
             </ul>
         </li>
 
